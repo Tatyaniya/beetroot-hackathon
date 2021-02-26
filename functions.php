@@ -54,13 +54,13 @@ function my_acf_init() {
 	if( function_exists('acf_register_block') ) {
 		// register a testimonial block
 		acf_register_block(array(
-			'name'				=> 'testimonial',
-			'title'				=> __('Testimonial'),
-			'description'		=> __('A custom testimonial block.'),
+			'name'				=> 'invoice',
+			'title'				=> __('Invoice'),
+			'description'		=> __('A custom invoice block.'),
 			'render_callback'	=> 'my_acf_block_render_callback',
-			'category'			=> 'formatting',
+			'category'			=> 'layout',
 			'icon'				=> 'admin-comments',
-			'keywords'			=> array( 'testimonial', 'quote' ),
+			'keywords'			=> array( 'invoice'),
 		));
 	}
 }
