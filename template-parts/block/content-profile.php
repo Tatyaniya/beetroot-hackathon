@@ -24,7 +24,6 @@ if ( $bg_color ) {
             <?php $avatar = get_field( "user_avatar" )['url'];
                 if ( $avatar ) :?>
                     <img src="<?php echo $avatar; ?>" alt="ava">
-                   
             <?php else: ?>
                 <img src="<?php echo get_template_directory_uri() ?>/assets/img/ava.png" alt="ava">
             <?php endif; ?>
