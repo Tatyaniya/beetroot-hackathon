@@ -47,7 +47,8 @@ jQuery(function ($) {
         });
     });
 
-    $('.popap').click( function() {
+    $('.popap').click( function(e) {
+        e.preventDefault();
         $('.profile__overlay').fadeIn();
     });
     $('.profile__close').click( function() {
