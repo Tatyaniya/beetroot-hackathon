@@ -38,12 +38,12 @@ if ( $bg_color ) {
             <?php
                 $city = get_field( "user_city" );
                 if ( $city ) :?>
-                    <a href="#" target="_blank" class="profile__city"><?php echo $city; ?></a>
+                    <a href="<?php echo $city; ?>" target="_blank" class="profile__city">Location</a>
             <?php endif; ?>
             <?php
                 $follow = get_field( "follow" );
                 if ( $follow ) :?>
-                    <a href="#" target="_blank" class="profile__follow"><?php echo $follow; ?></a>
+                    <a href="<?php echo $follow; ?>" target="_blank" class="profile__follow">Follow</a>
             <?php endif; ?>
         </div>
 
