@@ -1,28 +1,43 @@
-jQuery(function($){
-    function editContent() {
-        const focusField = $("[contenteditable='true']");
-        console.log(focusField);
-        focusField.on("click", function () {
-            $.ajax({
-                type: "POST",
-                url: themeVars.adminUrl,
-                data: {
-                    action: "edit_content",
-                },
-                success: function (jsonData) {
-                    var data = JSON.parse(jsonData);
-                    console.log(data);
-                },
-                error: function (MLHttpRequest, textStatus, errorThrown) {
-                    alert(errorThrown);
-                },
-            });
+jQuery(function ($) {
+    function OnEditableObjectChange(ClassName, Callback) {
+        var elts = document.getElementsByClassName(ClassName);
+        for (var i = 0; i < elts.length; ++i) {
+            elts[i].addEventListener("blur", function () {
+                var that = this;
+                Callback(that.innerHTML);
+            }, false);
+        }
+    }
+
+    function editContent(queryVars) {
+        $.ajax({
+            type: "POST",
+            url: themeVars.adminUrl,
+            data: {
+                action: "edit_content",
+                queryVars: queryVars,
+            },
+            success: function (jsonData) {
+                var data = JSON.parse(jsonData);
+                console.log(data.acf_field);
+                console.log(data.acf_content);
+            },
+            error: function (MLHttpRequest, textStatus, errorThrown) {
+                alert(errorThrown);
+            },
         });
     }
 
-
     $(document).ready(() => {
-        editContent();
+        const editableEl = $("[contenteditable='true']");
+        const queryVars = editableEl.data("query-vars");
+
+        OnEditableObjectChange("invoice__header", function () {
+            queryVars.acf_content = editableEl.text();
+            editableEl.data("query-vars", queryVars);
+            // document.getElementsByClassName("update-text")[0].innerHTML = txt;
+            editContent(queryVars);
+        });
     });
 });
 

@@ -14,6 +14,14 @@ $section_style = '';
 if ( $bg_color ) {
     $section_style .= "background-color:" . $bg_color;
 }
+
+$header = get_field( "invoice_header" );
+$ajax_args = array(
+    'acf_filed' => 'invoice_header',
+    'acf_content'   => ''
+);
+$str       = json_encode( $ajax_args );
+
 ?>
   <section class="invoice" style="<?= $section_style; ?>">
     <div class="doctype">invoice</div>
@@ -21,7 +29,8 @@ if ( $bg_color ) {
     <?php
         $header = get_field( "invoice_header" );
         if ( $header ) :?>
-            <div class="invoice__header"><?php echo $header; ?></div>
+            <div class="invoice__header"  data-query-vars='<?php echo $str; ?>'
+            contenteditable="true"><?php echo $header; ?></div>
     <?php endif; ?>
 
     <div class="invoice__content">
