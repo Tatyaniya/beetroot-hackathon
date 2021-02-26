@@ -1,14 +1,4 @@
 jQuery(function ($) {
-    function OnEditableObjectChange(ClassName, Callback) {
-        var elts = document.getElementsByClassName(ClassName);
-        for (var i = 0; i < elts.length; ++i) {
-            elts[i].addEventListener("blur", function () {
-                var that = this;
-                Callback(that.innerHTML);
-            }, false);
-        }
-    }
-
     function editContent(queryVars) {
         $.ajax({
             type: "POST",
@@ -28,6 +18,15 @@ jQuery(function ($) {
         });
     }
 
+    function generatePDF() {
+        // Choose the element that our invoice is rendered in.
+        const element = document.getElementById("invoice");
+        // Choose the element and save the PDF for our user.
+        html2pdf()
+            .from(element)
+            .save();
+    }
+
     $(document).ready(() => {
         const editableElements = $("[contenteditable='true']");
         editableElements.each(function () {
@@ -38,12 +37,12 @@ jQuery(function ($) {
                 editableEl.data("query-vars", queryVars);
                 editContent(queryVars);
             });
-            // OnEditableObjectChange("invoice__header", function () {
-            //     queryVars.acf_content = editableEl.text();
-            //     editableEl.data("query-vars", queryVars);
-            //     // document.getElementsByClassName("update-text")[0].innerHTML = txt;
-            //     editContent(queryVars);
-            // });
+        });
+
+
+        const html2pdfBtn = $("#download-invoice");
+        html2pdfBtn.on("click", function (e) {
+            generatePDF();
         });
     });
 
@@ -56,11 +55,10 @@ jQuery(function ($) {
     });
 });
 
-
-window.addEventListener('DOMContentLoaded', function() {
+window.addEventListener('DOMContentLoaded', function () {
     count();
 })
-window.addEventListener('load', function() {
+window.addEventListener('load', function () {
     changeNumber();
 })
 
@@ -69,10 +67,10 @@ function changeNumber() {
     data.forEach(element => {
         const hours = element.querySelector(".repeater__hours");
         const rate = element.querySelector('.repeater__rate');
-        hours.addEventListener('blur', function() {
+        hours.addEventListener('blur', function () {
             count();
         })
-        rate.addEventListener('blur', function() {
+        rate.addEventListener('blur', function () {
             count();
         })
     });
@@ -85,9 +83,17 @@ function count() {
 
     data.forEach(element => {
         const hours = element.querySelector(".repeater__hours").innerHTML;
-        const rate = element.querySelector('.repeater__rate').innerHTML.slice(1);
+        const rate = element.querySelector('.repeater__rate');
+        let rateData;
+        if (rate.innerHTML[0] == '$') {
+            rateData = rate.innerHTML.slice(1);
+        }
+        else{
+            rateData = rate.innerHTML;   
+        }
+        rate.innerHTML = "$" + rateData;
         const total = element.querySelector(".repeater__total");
-        const sum = hours * rate;
+        const sum = hours * rateData;
         total.innerHTML = "$" + sum;
     });
 
