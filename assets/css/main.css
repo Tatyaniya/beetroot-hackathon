@@ -1,0 +1,176 @@
+body {
+    background: #fff;
+    font-family: sans-serif;
+    font-size: 14px;
+    color: #000;
+}
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+* {
+    margin: 0;
+}
+.invoice {
+    max-width: 900px;
+    padding: 40px;
+    margin: 50px auto;
+}
+.doctype {
+    font-size: 25px;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-align: right;
+    color: rgba(0, 0, 0, 0.2);
+}
+.logo {
+    width: 260px;
+    margin: 0 auto 30px;
+}
+.invoice__header p {
+    text-align: center;
+}
+.invoice__header img {
+    margin: 0 auto 15px;
+}
+.logo__text {
+    width: 230px;
+    text-align: center;
+    margin: 0 auto;
+}
+.logo__name {
+    font-size: 15px;
+    text-transform: uppercase;
+}
+.logo__addr {
+    font-size: 15px;
+    font-style: normal;
+    color: rgba(0, 0, 0, 0.5);
+}
+.invoice__content {
+    color: rgba(0, 0, 0, 0.6);
+}
+.invoice__item {
+    display: flex;
+    justify-content: space-between;
+    padding: 25px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+.invoice__sign {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+.invoice__data {
+    font-size: 18px;
+}
+.repeater__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: rgba(0, 0, 0, 0.5);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    padding: 20px 0;
+}
+.font-weight-bold {
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 20px 0;
+}
+.repeater__task {
+    width: 40%;
+}
+.repeater__hours {
+    width: 10%;
+}
+.repeater__rate,
+.repeater__total {
+    width: 25%;
+}
+.repeater__title {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+.repeater__total {
+    text-align: right;
+}
+.total {
+    text-align: right;
+    padding: 25px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+.total__subtitle {
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+.total__cost {
+    font-size: 24px;
+}
+.signature {
+    padding: 25px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+.signature__sign {
+    font-size: 25px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+.signature__name {
+    font-weight: 700;
+}
+.profile {
+    color: #fff;
+    max-width: 600px;
+    padding: 40px 0 0;
+    margin: 20px auto;
+}
+.profile__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 30px;
+}
+.profile__ava {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid #fff;
+    margin-bottom: 30px;
+}
+.profile__name {
+    font-size: 30px;
+    color: #fff;
+    margin-bottom: 10px;
+}
+.profile__city {
+    font-size: 18px;
+    margin-bottom: 12px;
+    color: #fff;
+    text-decoration: none;
+}
+.profile__follow {
+    padding: 8px 15px;
+    color:rgba(0, 0, 0, 0.5);
+    background: #fff;
+    border-radius: 3px;
+    text-decoration: none;
+    font-weight: bold;
+}
+.profile__data {
+    display: flex;
+    justify-content: space-between;
+    padding: 25px 40px;
+    background: rgba(0, 0, 0, 0.5);
+}
+.profile__text {
+    margin-top: 10px;
+}
+.profile__info:nth-child(2) {
+    text-align: center;
+}
+.profile__info:last-child {
+    text-align: right;
+}

@@ -65,22 +65,28 @@ if ( function_exists( 'acf_add_options_page' ) ) {
 
 add_action( 'acf/init', 'my_acf_init' );
 function my_acf_init() {
-    // check function exists
-    if ( function_exists( 'acf_register_block' ) ) {
-        // register a testimonial block
-        acf_register_block(
-            array(
-                'name'            => 'invoice',
-                'title'           => __( 'Invoice' ),
-                'description'     => __( 'A custom invoice block.' ),
-                'render_callback' => 'my_acf_block_render_callback',
-                'category'        => 'layout',
-                'icon'            => 'admin-comments',
-                'keywords'        => array( 'invoice' ),
-            )
-        );
-    }
-
+	// check function exists
+	if( function_exists('acf_register_block') ) {
+		// register a testimonial block
+		acf_register_block(array(
+			'name'				=> 'invoice',
+			'title'				=> __('Invoice'),
+			'description'		=> __('A custom invoice block.'),
+			'render_callback'	=> 'my_acf_block_render_callback',
+			'category'			=> 'layout',
+			'icon'				=> 'admin-comments',
+			'keywords'			=> array( 'invoice'),
+		));
+        acf_register_block(array(
+			'name'				=> 'profile',
+			'title'				=> __('Profile'),
+			'description'		=> __('A custom invoice block.'),
+			'render_callback'	=> 'my_acf_block_render_callback',
+			'category'			=> 'layout',
+			'icon'				=> 'admin-comments',
+			'keywords'			=> array( 'profile'),
+		));
+	}
 }
 
 function my_acf_block_render_callback( $block ) {
