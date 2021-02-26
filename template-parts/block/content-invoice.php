@@ -40,8 +40,8 @@ if ( $bg_color ) {
                 $invoice_id = get_field( "invoice_id" );
                 if ( $invoice_id ) :?>
                     <div class="invoice__right">
-                        <p class="invoice__sign">invoice id</p>
-                        <p class="invoice__data"><?php echo $invoice_id; ?></p>
+                        <p class="invoice__sign" >invoice id</p>
+                        <p class="invoice__data" contenteditable="true"><?php echo $invoice_id; ?></p>
                     </div>
                 <?php endif; ?>
 
@@ -67,7 +67,7 @@ if ( $bg_color ) {
         </div>
         <div class="check">
             <div class="repeater">
-                <div class="repeater__row">
+                <div class="repeater__row__title">
                     <div class="repeater__task font-weight-bold">Task description</div>
                     <div class="repeater__hours font-weight-bold">hours</div>
                     <div class="repeater__rate font-weight-bold">rate per hour</div>
@@ -93,14 +93,14 @@ if ( $bg_color ) {
                             <?php
                                 $hours= get_sub_field( "hours" );
                                 if ( $hours) :?>
-                                    <span class="repeater__hours"><?php echo $hours; ?></span>
+                                    <span class="repeater__hours" contenteditable="true"><?php echo $hours; ?></span>
                             <?php endif; ?>
                             <?php
                                 $rate_per_hour= get_sub_field( "rate_per_hour" );
                                 if ( $rate_per_hour) :?>
                                     <span class="repeater__rate">$<?php echo $rate_per_hour; ?></span>
                             <?php endif; ?>
-                            <div class="repeater__total">$ 2.000.00</div>
+                            <div class="repeater__total">$0</div>
                         </div>
 
                     <?php endwhile; ?>
@@ -112,7 +112,7 @@ if ( $bg_color ) {
                     total
                 </div>
                 <div class="total__cost">
-                    $4.300.000
+                    $0
                 </div>
             </div>
         </div>
@@ -195,7 +195,14 @@ img {
     font-size: 18px;
 }
 
-
+.repeater__row__title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: rgba(0, 0, 0, 0.5);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    padding: 20px 0;
+    }
 .repeater__row {
     display: flex;
     justify-content: space-between;
