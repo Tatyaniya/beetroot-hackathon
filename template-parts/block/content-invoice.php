@@ -94,7 +94,7 @@ if ( $bg_color ) {
               <div class="invoice__left">
                         <div class="invoice__sign">prepared for</div>
                         <div
-                          class="invoice__data popap" contenteditable="true"
+                          class="invoice__data" contenteditable="true"
                           data-query-vars='<?php echo $str; ?>'><?php echo $invoice_prepared_for; ?>
                         </div>
                     </div>
