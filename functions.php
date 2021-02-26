@@ -1,5 +1,5 @@
 <?php
-define( 'THEME_VERSION', '1.0.1' );
+define( 'THEME_VERSION', '1.0.10' );
 function theme_enqueue_styles() {
     wp_enqueue_style(
         'main',
@@ -125,7 +125,6 @@ function edit_content_ajax_handler() {
 
     echo json_encode( $payload );
     die();
-
 }
 
 add_action( 'wp_ajax_nopriv_edit_content', 'edit_content_ajax_handler' );
