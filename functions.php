@@ -1,5 +1,5 @@
 <?php
-define( 'THEME_VERSION', '1.0.1' );
+define( 'THEME_VERSION', '1.0.10' );
 function theme_enqueue_styles() {
     wp_enqueue_style(
         'main',
@@ -13,8 +13,13 @@ function theme_enqueue_styles() {
     wp_enqueue_script( 'jquery', 'https://code.jquery.com/jquery-3.5.1.min.js', [], '3.5.1', false );
 
     wp_enqueue_script(
+        'html2pdf',
+        get_stylesheet_directory_uri() . '/assets/js/html2pdf.js/dist/html2pdf.bundle.js', THEME_VERSION
+    );
+
+    wp_enqueue_script(
         'custom-script',
-        get_stylesheet_directory_uri() . '/assets/js/script.js', THEME_VERSION
+        get_stylesheet_directory_uri() . '/assets/js/script.js', [ 'jquery', 'html2pdf' ],THEME_VERSION
     );
 
     // Throw variables from back to front end.
@@ -102,19 +107,21 @@ function my_acf_block_render_callback( $block ) {
  * Load More handler
  */
 function edit_content_ajax_handler() {
-    global $post;
-
     $main_id = get_option( 'page_on_front' );
 
     $query_vars = $_POST['queryVars'];
 
     $payload = array(
-        'acf_field'   => $query_vars["acf_filed"],
+        'acf_field'   => $query_vars["acf_field"],
+        'acf_field_type'   => $query_vars["acf_field_type"],
         'acf_content' => $query_vars["acf_content"]
     );
 
-    update_field( $payload['acf_field'], $payload['acf_content'], $main_id);
-
+    if ($query_vars["acf_field_type"] === "field") {
+        update_field( $payload['acf_field'], $payload['acf_content'], $main_id );
+    } else {
+        update_sub_field( $payload['acf_field'], $payload['acf_content'], $main_id );
+    }
 
     echo json_encode( $payload );
     die();

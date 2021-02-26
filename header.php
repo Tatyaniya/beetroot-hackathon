@@ -11,7 +11,16 @@
 <body>
 
 <?php $main_id = get_option( 'page_on_front' ); ?>
-
+<script>
+      // function generatePDF() {
+      //     // Choose the element that our invoice is rendered in.
+      //     const element = document.getElementById("invoice");
+      //     // Choose the element and save the PDF for our user.
+      //     html2pdf()
+      //         .from(element)
+      //         .save();
+      // }
+    </script>
   <header class="header">
     <div class="container">
       <a href="<?php echo get_home_url() ?>" class="logo-min"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/Logo.png" alt=""></a>
