@@ -84,9 +84,17 @@ function count() {
 
     data.forEach(element => {
         const hours = element.querySelector(".repeater__hours").innerHTML;
-        const rate = element.querySelector('.repeater__rate').innerHTML.slice(1);
+        const rate = element.querySelector('.repeater__rate');
+        let rateData;
+        if (rate.innerHTML[0] == '$') {
+            rateData = rate.innerHTML.slice(1);
+        }
+        else{
+            rateData = rate.innerHTML;   
+        }
+        rate.innerHTML = "$" + rateData;
         const total = element.querySelector(".repeater__total");
-        const sum = hours * rate;
+        const sum = hours * rateData;
         total.innerHTML = "$" + sum;
     });
 

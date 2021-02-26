@@ -1,5 +1,5 @@
 <?php
-define( 'THEME_VERSION', '1.0.1' );
+define( 'THEME_VERSION', '1.0.10' );
 function theme_enqueue_styles() {
     wp_enqueue_style(
         'main',
