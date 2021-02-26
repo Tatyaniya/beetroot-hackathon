@@ -23,10 +23,10 @@ if ( $bg_color ) {
     <div class="doctype">invoice</div>
 
       <?php
-      $header        = get_field( "invoice_header", $main_id );
+      $header  = get_field( "invoice_header", $main_id );
       if ( $header ) :
           $selector = "invoice_header";
-          $field_obj = get_field_object( $selector );
+          $field_obj = get_field_object( $selector, $main_id );
           $ajax_args = array(
               'acf_filed'   => $field_obj["name"],
               'acf_content' => ''
@@ -41,7 +41,7 @@ if ( $bg_color ) {
     <div class="invoice__content">
         <div class="invoice__item">
             <?php
-            $invoice_due_date = get_field( "invoice_due_date" );
+            $invoice_due_date = get_field( "invoice_due_date");
             if ( $invoice_due_date ) :
                 $selector = "invoice_due_date";
                 $field_obj    = get_field_object( $selector );
@@ -63,7 +63,7 @@ if ( $bg_color ) {
             $invoice_id    = get_field( "invoice_id", $main_id );
             if ( $invoice_id ) :
                 $selector = "invoice_id";
-                $field_obj = get_field_object( $selector );
+                $field_obj = get_field_object( $selector, $main_id );
                 $ajax_args = array(
                     'acf_filed'   => $field_obj["name"],
                     'acf_content' => ''
@@ -81,10 +81,10 @@ if ( $bg_color ) {
         </div>
         <div class="invoice__item">
             <?php
-            $invoice_prepared_for = get_field( "invoice_prepared_for");
+            $invoice_prepared_for = get_field( "invoice_prepared_for", $main_id);
             if ( $invoice_prepared_for ) :
                 $selector = "invoice_prepared_for";
-                $field_obj        = get_field_object( $selector );
+                $field_obj        = get_field_object( $selector, $main_id );
                 $ajax_args        = array(
                     'acf_filed'   => $field_obj["name"],
                     'acf_content' => ''
@@ -99,7 +99,7 @@ if ( $bg_color ) {
                     </div>
             <?php endif; ?>
             <?php
-            $invoice_project = get_field( "invoice_project" );
+            $invoice_project = get_field( "invoice_project", $main_id );
             if ( $invoice_project ) :
                 $selector = "invoice_project";
                 $field_obj   = get_field_object( $selector );
@@ -127,8 +127,8 @@ if ( $bg_color ) {
                     <div class="repeater__total font-weight-bold">total</div>
                 </div>
 
-                <?php if ( have_rows( 'invoice_tasks' ) ) : ?>
-                    <?php while ( have_rows( 'invoice_tasks' ) ) : the_row(); ?>
+                <?php if ( have_rows( 'invoice_tasks') ) : ?>
+                    <?php while ( have_rows( 'invoice_tasks') ) : the_row(); ?>
 
                     <div class="repeater__row">
                             <div class="repeater__task">
@@ -197,6 +197,7 @@ if ( $bg_color ) {
                         </div>
 
                     <?php endwhile; ?>
+                    
                 <?php endif; ?>
 
             </div>
@@ -211,7 +212,7 @@ if ( $bg_color ) {
         </div>
         <div class="signature">
             <?php
-            $invoice_signature = get_field( "invoice_signature" );
+            $invoice_signature = get_field( "invoice_signature" , $main_id);
             if ( $invoice_signature ) :
                 $selector = "invoice_signature";
                 $field_obj     = get_field_object( $selector );
