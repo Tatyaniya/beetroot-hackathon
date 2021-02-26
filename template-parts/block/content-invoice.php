@@ -17,19 +17,25 @@ $section_style = '';
 if ( $bg_color ) {
     $section_style .= "background-color:" . $bg_color;
 }
-
 ?>
-  <section class="invoice" style="<?= $section_style; ?>">
+
+  <div class="buttons">
+    <button type="button" id="download-invoice">Download as PDF</button>
+    <button type="button" id="print-invoice" onClick="window.print()">Print this Page</button>
+  </div>
+
+  <section id="invoice" class="invoice" style="<?= $section_style; ?>">
     <div class="doctype">invoice</div>
 
       <?php
-      $header  = get_field( "invoice_header", $main_id );
+      $header        = get_field( "invoice_header", $main_id );
       if ( $header ) :
           $selector = "invoice_header";
           $field_obj = get_field_object( $selector, $main_id );
           $ajax_args = array(
-              'acf_filed'   => $field_obj["name"],
-              'acf_content' => ''
+              'acf_field'      => $field_obj["key"],
+              'acf_field_type' => 'field',
+              'acf_content'    => ''
           );
           $str       = json_encode( $ajax_args );
           ?>
@@ -41,13 +47,14 @@ if ( $bg_color ) {
     <div class="invoice__content">
         <div class="invoice__item">
             <?php
-            $invoice_due_date = get_field( "invoice_due_date");
+            $invoice_due_date = get_field( "invoice_due_date" );
             if ( $invoice_due_date ) :
                 $selector = "invoice_due_date";
                 $field_obj    = get_field_object( $selector );
                 $ajax_args    = array(
-                    'acf_filed'   => $field_obj["name"],
-                    'acf_content' => ''
+                    'acf_field'      => $field_obj["key"],
+                    'acf_field_type' => 'field',
+                    'acf_content'    => ''
                 );
                 $str          = json_encode( $ajax_args );
                 ?>
@@ -65,8 +72,9 @@ if ( $bg_color ) {
                 $selector = "invoice_id";
                 $field_obj = get_field_object( $selector, $main_id );
                 $ajax_args = array(
-                    'acf_filed'   => $field_obj["name"],
-                    'acf_content' => ''
+                    'acf_field'      => $field_obj["key"],
+                    'acf_field_type' => 'field',
+                    'acf_content'    => ''
                 );
                 $str       = json_encode( $ajax_args );
                 ?>
@@ -81,13 +89,14 @@ if ( $bg_color ) {
         </div>
         <div class="invoice__item">
             <?php
-            $invoice_prepared_for = get_field( "invoice_prepared_for", $main_id);
+            $invoice_prepared_for = get_field( "invoice_prepared_for", $main_id );
             if ( $invoice_prepared_for ) :
                 $selector = "invoice_prepared_for";
                 $field_obj        = get_field_object( $selector, $main_id );
                 $ajax_args        = array(
-                    'acf_filed'   => $field_obj["name"],
-                    'acf_content' => ''
+                    'acf_field'      => $field_obj["key"],
+                    'acf_field_type' => 'field',
+                    'acf_content'    => ''
                 );
                 $str              = json_encode( $ajax_args );
                 ?>
@@ -104,8 +113,9 @@ if ( $bg_color ) {
                 $selector = "invoice_project";
                 $field_obj   = get_field_object( $selector );
                 $ajax_args   = array(
-                    'acf_filed'   => $field_obj["name"],
-                    'acf_content' => ''
+                    'acf_field'      => $field_obj["key"],
+                    'acf_field_type' => 'field',
+                    'acf_content'    => ''
                 );
                 $str         = json_encode( $ajax_args );
                 ?>
@@ -127,19 +137,20 @@ if ( $bg_color ) {
                     <div class="repeater__total font-weight-bold">total</div>
                 </div>
 
-                <?php if ( have_rows( 'invoice_tasks') ) : ?>
-                    <?php while ( have_rows( 'invoice_tasks') ) : the_row(); ?>
+                <?php if ( have_rows( 'invoice_tasks' ) ) : ?>
+                    <?php while ( have_rows( 'invoice_tasks' ) ) : the_row(); ?>
 
                     <div class="repeater__row">
                             <div class="repeater__task">
                                 <?php
-                                $task_title    = get_sub_field( "task_title" );
+                                $task_title    = get_sub_field( "task_title", $main_id );
                                 if ( $task_title ) :
                                     $selector = "task_title";
-                                    $field_obj = get_field_object( $selector );
+                                    $field_obj = get_sub_field_object( $selector );
                                     $ajax_args = array(
-                                        'acf_filed'   => $field_obj["name"],
-                                        'acf_content' => ''
+                                        'acf_field'      => $field_obj["key"],
+                                        'acf_field_type' => 'sub_field',
+                                        'acf_content'    => ''
                                     );
                                     $str       = json_encode( $ajax_args );
                                     ?>
@@ -148,13 +159,14 @@ if ( $bg_color ) {
                                     data-query-vars='<?php echo $str; ?>'><?php echo $task_title; ?></h4>
                                 <?php endif; ?>
                                 <?php
-                                $task_description = get_sub_field( "task_description" );
+                                $task_description = get_sub_field( "task_description", $main_id );
                                 if ( $task_description ) :
                                     $selector = "task_description";
-                                    $field_obj    = get_field_object( $selector );
+                                    $field_obj    = get_sub_field_object( $selector );
                                     $ajax_args    = array(
-                                        'acf_filed'   => $field_obj["name"],
-                                        'acf_content' => ''
+                                        'acf_field'      => $field_obj["key"],
+                                        'acf_field_type' => 'sub_field',
+                                        'acf_content'    => ''
                                     );
                                     $str          = json_encode( $ajax_args );
                                     ?>
@@ -167,10 +179,11 @@ if ( $bg_color ) {
                         $hours         = get_sub_field( "hours" );
                         if ( $hours ) :
                             $selector = "hours";
-                            $field_obj = get_field_object( $selector );
+                            $field_obj = get_sub_field_object( $selector );
                             $ajax_args = array(
-                                'acf_filed'   => $field_obj["name"],
-                                'acf_content' => ''
+                                'acf_field'      => $field_obj["key"],
+                                'acf_field_type' => 'sub_field',
+                                'acf_content'    => ''
                             );
                             $str       = json_encode( $ajax_args );
                             ?>
@@ -182,10 +195,11 @@ if ( $bg_color ) {
                         $rate_per_hour = get_sub_field( "rate_per_hour" );
                         if ( $rate_per_hour ) :
                             $selector = "rate_per_hour";
-                            $field_obj = get_field_object( $selector );
+                            $field_obj = get_sub_field_object( $selector );
                             $ajax_args = array(
-                                'acf_filed'   => $field_obj["name"],
-                                'acf_content' => ''
+                                'acf_field'      => $field_obj["key"],
+                                'acf_field_type' => 'sub_field',
+                                'acf_content'    => ''
                             );
                             $str       = json_encode( $ajax_args );
                             ?>
@@ -197,7 +211,7 @@ if ( $bg_color ) {
                         </div>
 
                     <?php endwhile; ?>
-                    
+
                 <?php endif; ?>
 
             </div>
@@ -212,13 +226,14 @@ if ( $bg_color ) {
         </div>
         <div class="signature">
             <?php
-            $invoice_signature = get_field( "invoice_signature" , $main_id);
+            $invoice_signature = get_field( "invoice_signature", $main_id );
             if ( $invoice_signature ) :
                 $selector = "invoice_signature";
                 $field_obj     = get_field_object( $selector );
                 $ajax_args     = array(
-                    'acf_filed'   => $field_obj["name"],
-                    'acf_content' => ''
+                    'acf_field'      => $field_obj["key"],
+                    'acf_field_type' => 'field',
+                    'acf_content'    => ''
                 );
                 $str           = json_encode( $ajax_args );
                 ?>
