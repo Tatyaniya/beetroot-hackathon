@@ -29,18 +29,26 @@ jQuery(function ($) {
     }
 
     $(document).ready(() => {
-        const editableEl = $("[contenteditable='true']");
-        const queryVars = editableEl.data("query-vars");
-
-        OnEditableObjectChange("invoice__header", function () {
-            queryVars.acf_content = editableEl.text();
-            editableEl.data("query-vars", queryVars);
-            // document.getElementsByClassName("update-text")[0].innerHTML = txt;
-            editContent(queryVars);
+        const editableElements = $("[contenteditable='true']");
+        editableElements.each(function () {
+            const editableEl = $(this);
+            const queryVars = editableEl.data("query-vars");
+            editableEl.on("blur", function () {
+                queryVars.acf_content = editableEl.text();
+                editableEl.data("query-vars", queryVars);
+                editContent(queryVars);
+            });
+            // OnEditableObjectChange("invoice__header", function () {
+            //     queryVars.acf_content = editableEl.text();
+            //     editableEl.data("query-vars", queryVars);
+            //     // document.getElementsByClassName("update-text")[0].innerHTML = txt;
+            //     editContent(queryVars);
+            // });
         });
     });
 
-    $('.popap').click( function() {
+    $('.popap').click( function(e) {
+        e.preventDefault();
         $('.profile__overlay').fadeIn();
     });
     $('.profile__close').click( function() {

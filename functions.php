@@ -104,6 +104,8 @@ function my_acf_block_render_callback( $block ) {
 function edit_content_ajax_handler() {
     global $post;
 
+    $main_id = get_option( 'page_on_front' );
+
     $query_vars = $_POST['queryVars'];
 
     $payload = array(
@@ -111,7 +113,7 @@ function edit_content_ajax_handler() {
         'acf_content' => $query_vars["acf_content"]
     );
 
-    update_field( $payload['acf_field'], $payload['acf_content'], 22 );
+    update_field( $payload['acf_field'], $payload['acf_content'], $main_id);
 
 
     echo json_encode( $payload );
