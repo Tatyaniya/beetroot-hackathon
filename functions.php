@@ -62,6 +62,15 @@ function my_acf_init() {
 			'icon'				=> 'admin-comments',
 			'keywords'			=> array( 'invoice'),
 		));
+        acf_register_block(array(
+			'name'				=> 'profile',
+			'title'				=> __('Profile'),
+			'description'		=> __('A custom invoice block.'),
+			'render_callback'	=> 'my_acf_block_render_callback',
+			'category'			=> 'layout',
+			'icon'				=> 'admin-comments',
+			'keywords'			=> array( 'profile'),
+		));
 	}
 }
 
