@@ -7,9 +7,18 @@ function theme_enqueue_styles() {
     wp_enqueue_style( 'custom-style',
         get_template_directory_uri() . '/assets/css/main.css', array('main'), THEME_VERSION
     );
+    // CDN hosted jQuery placed in the header, as some plugins require that jQuery is loaded in the header.
+    wp_enqueue_script( 'jquery', 'https://code.jquery.com/jquery-3.5.1.min.js', [], '3.5.1', false );
+
     wp_enqueue_script( 'custom-script',
         get_stylesheet_directory_uri() . '/assets/js/script.js', THEME_VERSION
     );
+
+    // Throw variables from back to front end.
+    $theme_vars = array(
+        'adminUrl' => admin_url( 'admin-ajax.php' )
+    );
+    wp_localize_script( 'custom-script', 'themeVars', $theme_vars );
 }
 
 add_theme_support( 'post-thumbnails' );
@@ -74,16 +83,23 @@ function my_acf_block_render_callback( $block ) {
 	}
 }
 
+/**
+ * Load More handler
+ */
+function edit_content_ajax_handler() {
+    global $post;
 
+    $query_vars = $_POST['queryVars'];
 
-// function custom_posts_per_page( $query ) {
-//     if ( $query->is_archive('postservies') ) {
-//         set_query_var('posts_per_page', -1);
-//     }
-//     if ( $query->is_archive('postprojects') ) {
-//         set_query_var('posts_per_page', -1);
-//     }
-// }
-// add_action( 'pre_get_posts', 'custom_posts_per_page' );
+    $payload = array(
+        'test'      => array(),
+        'query_vars' => $query_vars, // Here for debugging purposes
+    );
 
-?>
+    echo json_encode( $payload );
+    die();
+
+}
+
+add_action( 'wp_ajax_nopriv_edit_content', 'edit_content_ajax_handler' );
+add_action( 'wp_ajax_edit_content', 'edit_content_ajax_handler' );
