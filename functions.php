@@ -118,7 +118,6 @@ function edit_content_ajax_handler() {
 
     echo json_encode( $payload );
     die();
-
 }
 
 add_action( 'wp_ajax_nopriv_edit_content', 'edit_content_ajax_handler' );
