@@ -16,65 +16,68 @@ if ( $bg_color ) {
 }
 ?>
 
+<div class="profile__overlay">
+    <section class="profile" style="<?= $section_style; ?>">
+        <span class="profile__close"></span>
+        <div class="profile__content">
+            
+            <div class="profile__ava">
+                <?php $avatar = get_field( "user_avatar" )['url'];
+                    if ( $avatar ) :?>
+                        <img src="<?php echo $avatar; ?>" alt="ava">
+                <?php else: ?>
+                    <img src="<?php echo get_template_directory_uri() ?>/assets/img/ava.png" alt="ava">
+                <?php endif; ?>
+            </div>
 
-<section class="profile" style="<?= $section_style; ?>">
-    <div class="profile__content">
-        
-        <div class="profile__ava">
-            <?php $avatar = get_field( "user_avatar" )['url'];
-                if ( $avatar ) :?>
-                    <img src="<?php echo $avatar; ?>" alt="ava">
-            <?php else: ?>
-                <img src="<?php echo get_template_directory_uri() ?>/assets/img/ava.png" alt="ava">
-            <?php endif; ?>
-        </div>
-
-        <?php 
-            $name = get_field( "user_name" );
-            if ( $name ) :?>
-                <div class="profile__name"><?php echo $name; ?></div>
-        <?php endif; ?>
-        <?php
-            $city = get_field( "user_city" );
-            if ( $city ) :?>
-                <a href="#" target="_blank" class="profile__city"><?php echo $city; ?></a>
-        <?php endif; ?>
-        <?php
-            $follow = get_field( "follow" );
-            if ( $follow ) :?>
-                <a href="#" target="_blank" class="profile__follow"><?php echo $follow; ?></a>
-        <?php endif; ?>
-    </div>
-
-    <div class="profile__data">
-        <div class="profile__info">
             <?php 
-                $followers = get_field( "followers" );
-                    if ( $followers ) :?>
-                    <p class="profile__followers"><?php echo $followers; ?>
-                    <?php else: ?>0
-                </p>
+                $name = get_field( "user_name" );
+                if ( $name ) :?>
+                    <div class="profile__name"><?php echo $name; ?></div>
             <?php endif; ?>
-            <p class="profile__text">Followers</p>
-        </div>
-        <div class="profile__info">
             <?php
-                $photos = get_field( "photos" );
-                if ( $photos ) :?>
-                    <p class="profile__photos"><?php echo $photos; ?>
-                    <?php else: ?>0</p>
+                $city = get_field( "user_city" );
+                if ( $city ) :?>
+                    <a href="#" target="_blank" class="profile__city"><?php echo $city; ?></a>
             <?php endif; ?>
-            <p class="profile__text">Photos</p>
-        </div>
-        <div class="profile__info">
             <?php
-                $like = get_field( "like" );
-                if ( $like ) :?>
-                    <p class="profile__like"><?php echo $like; ?>
+                $follow = get_field( "follow" );
+                if ( $follow ) :?>
+                    <a href="#" target="_blank" class="profile__follow"><?php echo $follow; ?></a>
+            <?php endif; ?>
+        </div>
+
+        <div class="profile__data">
+            <div class="profile__info">
+                <?php 
+                    $followers = get_field( "followers" );
+                        if ( $followers ) :?>
+                        <p class="profile__followers"><?php echo $followers; ?>
                         <?php else: ?>0
                     </p>
-            <?php endif; ?> 
-            <p class="profile__text">Like</p>
+                <?php endif; ?>
+                <p class="profile__text">Followers</p>
+            </div>
+            <div class="profile__info">
+                <?php
+                    $photos = get_field( "photos" );
+                    if ( $photos ) :?>
+                        <p class="profile__photos"><?php echo $photos; ?>
+                        <?php else: ?>0</p>
+                <?php endif; ?>
+                <p class="profile__text">Photos</p>
+            </div>
+            <div class="profile__info">
+                <?php
+                    $like = get_field( "like" );
+                    if ( $like ) :?>
+                        <p class="profile__like"><?php echo $like; ?>
+                            <?php else: ?>0
+                        </p>
+                <?php endif; ?> 
+                <p class="profile__text">Like</p>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
+</div>
+

@@ -39,6 +39,13 @@ jQuery(function ($) {
             editContent(queryVars);
         });
     });
+
+    $('.popap').click( function() {
+        $('.profile__overlay').fadeIn();
+    });
+    $('.profile__close').click( function() {
+        $('.profile__overlay').fadeOut();
+    });
 });
 
 
