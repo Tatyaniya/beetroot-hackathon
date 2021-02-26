@@ -6,6 +6,9 @@
  * @var array $block
  */
 
+ 
+$main_id = get_option( 'page_on_front' );
+
 $slug     = str_replace( 'acf/', '', $block['name'] );
 $block_id = $slug . '-' . $block['id'];
 
@@ -27,7 +30,7 @@ $str       = json_encode( $ajax_args );
     <div class="doctype">invoice</div>
 
     <?php
-        $header = get_field( "invoice_header" );
+        $header = get_field( "invoice_header", $main_id );
         if ( $header ) :?>
             <div class="invoice__header"  data-query-vars='<?php echo $str; ?>'
             contenteditable="true"><?php echo $header; ?></div>
@@ -46,10 +49,10 @@ $str       = json_encode( $ajax_args );
                 <?php endif; ?>
 
             <?php
-                $invoice_id = get_field( "invoice_id" );
+                $invoice_id = get_field( "invoice_id", $main_id );
                 if ( $invoice_id ) :?>
                     <div class="invoice__right">
-                        <p class="invoice__sign" >invoice id</p>
+                        <p class="invoice__sign" >invoice id </p>
                         <p class="invoice__data" contenteditable="true"><?php echo $invoice_id; ?></p>
                     </div>
                 <?php endif; ?>

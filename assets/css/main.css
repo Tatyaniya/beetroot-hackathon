@@ -66,6 +66,14 @@ img {
 .invoice__data {
     font-size: 18px;
 }
+.repeater__row__title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: rgba(0, 0, 0, 0.5);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    padding: 20px 0;
+}
 .repeater__row {
     display: flex;
     justify-content: space-between;
