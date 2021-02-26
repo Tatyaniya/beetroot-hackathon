@@ -223,7 +223,8 @@ img {
 .profile__info:last-child {
     text-align: right;
 }
-.popap {
+.popap,
+button {
     display: block;
     width: 200px;
     height: 50px;
@@ -237,7 +238,19 @@ img {
     margin: 40px auto;
     text-decoration: none;
     transition: all 0.3s ease;
+    background: transparent;
 }
-.popap:hover {
+.popap:hover,
+button:hover {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3) inset;
+}
+.buttons {
+    display: flex;
+    justify-content: center;
+}
+button {
+    margin: 0;
+}
+#download-invoice {
+    margin-right: 20px;
 }
