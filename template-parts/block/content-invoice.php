@@ -177,12 +177,12 @@ if ( $bg_color ) {
                                 <?php endif; ?>
                             </div>
                         <?php
-                        $hours         = get_sub_field( "hours" );
+                        $hours         = get_sub_field( "hours", $main_id  );
                         if ( $hours ) :
                             $selector = "hours";
-                            $field_obj = get_sub_field_object( $selector );
+                            $field_obj = get_sub_field_object( $selector, $main_id  );
                             $ajax_args = array(
-                                'acf_field'      => $field_obj["key"],
+                                'acf_field'      => [$field_obj["parent"], 1, $field_obj["key"]],
                                 'acf_field_type' => 'sub_field',
                                 'acf_content'    => ''
                             );

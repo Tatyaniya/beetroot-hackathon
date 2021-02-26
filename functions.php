@@ -120,7 +120,7 @@ function edit_content_ajax_handler() {
     if ($query_vars["acf_field_type"] === "field") {
         update_field( $payload['acf_field'], $payload['acf_content'], $main_id );
     } else {
-        update_sub_field( $payload['acf_field'], $payload['acf_content'], $main_id );
+        update_sub_field( $payload['acf_field'], $payload['acf_content']);
     }
 
     echo json_encode( $payload );
