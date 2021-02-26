@@ -1,1 +1,1 @@
-<?php/** * Block Name: Invoice * Category: layout * * @var array $block */$slug         = str_replace( 'acf/', '', $block['name'] );$block_id     = $slug . '-' . $block['id'];
+<?php/** * Block Name: Invoice * Category: layout * * @var array $block */$slug         = str_replace( 'acf/', '', $block['name'] );$block_id     = $slug . '-' . $block['id'];echo "shshhs";the_field("invoice_header", $block_id);
