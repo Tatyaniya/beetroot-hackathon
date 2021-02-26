@@ -138,8 +138,8 @@ if ( $bg_color ) {
                     <div class="repeater__total font-weight-bold">total</div>
                 </div>
 
-                <?php if ( have_rows( 'invoice_tasks' ) ) : ?>
-                    <?php while ( have_rows( 'invoice_tasks' ) ) : the_row(); ?>
+                <?php if ( have_rows( 'invoice_tasks') ) : ?>
+                    <?php while ( have_rows( 'invoice_tasks') ) : the_row(); ?>
 
                     <div class="repeater__row">
                             <div class="repeater__task">
