@@ -61,7 +61,9 @@ $str       = json_encode( $ajax_args );
                 if ( $invoice_prepared_for ) :?>
                     <div class="invoice__left">
                         <div class="invoice__sign">prepared for</div>
-                        <div class="invoice__data popap"><?php echo $invoice_prepared_for; ?></div>
+                        <div
+                          class="invoice__data popap" contenteditable="true"
+                          data-query-vars='<?php echo $str; ?>'><?php echo $invoice_prepared_for; ?></div>
                     </div>
             <?php endif; ?>
             <?php
